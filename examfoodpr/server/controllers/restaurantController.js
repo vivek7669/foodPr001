@@ -38,7 +38,7 @@ const createRestaurant = async (req, res) => {
 const getAllRestaurants = async (req, res) => {
     if (req.user.role == "superadmin") {
         try {
-            const restaurants = await restaurant.find();
+            const restaurants = await restaurant.find().populate("createdBy").populate("admins");
             res.status(200).json({ restaurants });
           } catch (error) {
             console.error("Error fetching restaurants:", error);

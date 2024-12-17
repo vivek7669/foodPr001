@@ -38,7 +38,7 @@ else{
 const getAllFoods = async (req, res) => {
   try {
     const { restaurantId } = req.params;
-    const foods = await food.find({ restaurantId });
+    const foods = await food.find({ restaurantId }).populate("restaurantId").populate("createdBy");
 
     if (foods.length === 0) {
       return res.status(404).json({ message: "No foods found for this restaurant" });
